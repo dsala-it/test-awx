@@ -28,12 +28,14 @@ all:
         admin_group: prodgroup
     appservers:
       hosts:
-        node1:
-          ansible_host: 192.168.56.21
-        node2:
-          ansible_host: 192.168.56.22
-        node3:
-          ansible_host: 192.168.56.23
+        deb-node1:
+          ansible_host: 192.168.56.11
+        deb-node2:
+          ansible_host: 192.168.56.12
+        cen-node1:
+          ansible_host: 192.168.56.13
+        cen-node2:
+          ansible_host: 192.168.56.14
       vars:
         env: "vardev"
         default_user_password: passerpasser
