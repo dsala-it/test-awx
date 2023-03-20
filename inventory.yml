@@ -14,7 +14,7 @@ all:
     default_user_password: passerpasser
     admin_group: prodgroup
   children:
-    prod:
+    prodservers:
       hosts:
         awx.digitastuces.com:
           ansible_host: 139.99.8.106
