@@ -1,0 +1,6 @@
+*.log
+*.retry
+.vagrant/
+build/
+context/
+artifacts/
