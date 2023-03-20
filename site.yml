@@ -1,5 +1,6 @@
-- hosts: vmservers
+- hosts: prod
   become: yes
+  gather_facts: True
 
   tasks:
     - name: Update apt cache
@@ -13,15 +14,8 @@
           - python3-pip
           - python3-virtualenv
           - virtualenv
-          - nginx
           - git
         state: present
-      when: ansible_os_family == "Debian"
-
-    - name: Ensure nginx service started
-      systemd:
-        name: nginx
-        state: started
       when: ansible_os_family == "Debian"
 
     - name: Add the user running webapp
@@ -57,39 +51,3 @@
         group: www-data
         recurse: true
       when: ansible_os_family == "Debian"
-    
-    - name: Template systemd service config
-      template:
-        src: templates/app.service.j2
-        dest: /etc/systemd/system/hello.service
-      when: ansible_os_family == "Debian"
-    
-    # - name: Start systemd app service
-    #   systemd:
-    #     name: "hello.service"
-    #     state: restarted
-    #     enabled: yes
-    #   when: ansible_os_family == "Debian"
-    
-    # - name: Template nginx site config
-    #   template:
-    #     src: templates/nginx.conf.j2
-    #     dest: /etc/nginx/sites-available/hello.test.conf
-    
-    # - name: Remove default nginx site config
-    #   file:
-    #     path: /etc/nginx/sites-enabled/default
-    #     state: absent
-    
-    # - name: Enable nginx site for hello webapp
-    #   file:
-    #     src: /etc/nginx/sites-available/hello.test.conf
-    #     dest: /etc/nginx/sites-enabled/hello.test.conf
-    #     state: link
-    #     force: yes
-    
-    # - name: Restart nginx service
-    #   systemd:
-    #     name: "nginx"
-    #     state: restarted
-    #     enabled: yes
