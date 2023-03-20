@@ -12,21 +12,7 @@ all:
     ansible_become_method: sudo
     #ansible_become_user: vagrant
   children:
-    prod:
-      hosts:
-        awx:
-          ansible_host: 139.99.8.106
-        galaxy:
-          ansible_host: 139.99.131.14
-      vars:
-        env: "varprod"
-        ansible_connection: ssh
-        ansible_user: ansible
-        ansible_ssh_user: ansible
-        ansible_port: 22
-        default_user_password: passerpasser
-        admin_group: prodgroup
-    appservers:
+    vmservers:
       hosts:
         deb-node1:
           ansible_host: 192.168.56.11
@@ -40,13 +26,3 @@ all:
         env: "vardev"
         default_user_password: passerpasser
         admin_group: groupe1
-    master:
-      hosts:
-        ansible[1:2]: {}
-    local:
-      hosts:
-        localhost:
-      vars:
-        ansible_connection: local
-        ansible_become_user: adieng
-        ansible_python_interpreter: "{{ ansible_playbook_python }}"

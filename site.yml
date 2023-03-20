@@ -1,4 +1,4 @@
-- hosts: appservers
+- hosts: vmservers
   become: yes
 
   tasks:
